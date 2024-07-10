@@ -1,11 +1,14 @@
-const productList = () => {
-    return fetch("http://localhost")
+
+const url ="https://my-json-server.typicode.com/joserf42/alura-geek-api/db"
+
+function misProductos() {
+  const productList = () => {
+    return fetch(url)
         .then((res) => res.json())
         .catch((err) => console.log(err));
-}
-
-const createProducts = (name, price, Image) => {
-    return fetch("http://localhost", {
+    }
+    const createProducts = (name, price, Image) => {
+    return fetch(url, {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -18,7 +21,15 @@ const createProducts = (name, price, Image) => {
     })
     .then((res) => res.json())
     .catch((err) => console.log(err));
+    }  
 }
+console.log(misProductos)
+
+export const servicesProducts = {
+    productList,
+    createProducts,
+};
+
 /*
 const deleteProducts = (id) => {
     return fetch("http://localhost", {
@@ -34,14 +45,14 @@ export const servicesProducts = {
     productList,
     createProducts,
 };
-*/
+
 const deleteProducts = (id) => {
-    return fetch(\`http://localhost/products/\${id}\`, {
+    return fetch(url,) {
         method: "DELETE",
         headers: {
             "Content-type": "application/json",
         }
-    })
+    }
     .then((res) => {
         if (!res.ok) {
             throw new Error('Error al eliminar el producto');
@@ -56,3 +67,4 @@ export const servicesProducts = {
     createProducts,
     deleteProducts, // Asegúrate de exportar también el método deleteProducts
 };
+*/
