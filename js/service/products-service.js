@@ -1,70 +1,43 @@
+async function addCard() {
+//const url ="http://localhost:3000/products"
+const apiUrl = await fetch("https://my-json-server.typicode.com/joserf42/alura-geek-api/db")
+const product =  apiUrl.json();
+return product;
 
-const url ="https://my-json-server.typicode.com/joserf42/alura-geek-api/db"
+}
 
-function misProductos() {
-  const productList = () => {
-    return fetch(url)
-        .then((res) => res.json())
-        .catch((err) => console.log(err));
-    }
-    const createProducts = (name, price, Image) => {
-    return fetch(url, {
+// metodos get, post, delete
+
+
+async function createProducts(name, price, image){
+    return await fetch(apiUrl, {
         method: "POST",
         headers: {
             "Content-type": "application/json",
         },
         body: JSON.stringify({
-            name,
-            price,
-            Image,
+            name:name,
+            price:price,
+            image:image,
         })
     })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
-    }  
-}
-console.log(misProductos)
-
-export const servicesProducts = {
-    productList,
-    createProducts,
 };
 
-/*
-const deleteProducts = (id) => {
-    return fetch("http://localhost", {
-        method: "DELETE",
-        headers: {
-            "Content-type": "application/json",
-
-        }
+const deleteProducts = async (id) => {
+    try {
+        const res = await fetch(`apiUrl${id}`, {
+            method: "DELETE",
+        });
+        return await res.json()
+                
+    } catch (error) {
+        return console.log(error)
         
-}
-
-export const servicesProducts = {
-    productList,
-    createProducts,
-};
-
-const deleteProducts = (id) => {
-    return fetch(url,) {
-        method: "DELETE",
-        headers: {
-            "Content-type": "application/json",
-        }
     }
-    .then((res) => {
-        if (!res.ok) {
-            throw new Error('Error al eliminar el producto');
-        }
-        return res.json();
-    })
-    .catch((err) => console.log(err));
 }
 
 export const servicesProducts = {
-    productList,
+    addCard,
     createProducts,
-    deleteProducts, // Asegúrate de exportar también el método deleteProducts
-};
-*/
+    deleteProducts
+}

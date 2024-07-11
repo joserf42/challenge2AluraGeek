@@ -4,6 +4,7 @@ import { servicesProducts } from "../service/products-service.js";
 const productContainer = document.querySelector("[data-product]");
 const form = document.querySelector("[data-form]");
 
+// Creando el div
 function createCard (name, price, image, id) {
     const card = document.createElement("div");
     card.classList.add("card");
@@ -23,7 +24,7 @@ function createCard (name, price, image, id) {
         </div>
     </div>
     `;
-
+    // eliminar card desde el botón de papelera
     card.querySelector(".delete-button").addEventListener("click", (event) => {
         const id = event.target.closest(".delete-button").dataset.id;
         servicesProducts.deleteProducts(id)
@@ -40,7 +41,7 @@ function createCard (name, price, image, id) {
 
 const render = async () => {
     try {
-        const listProducts = await servicesProducts.productList();
+        const listProducts = await servicesProducts.addCard();
         listProducts.forEach(product => {
             createCard(product.name, product.price, product.image, product.id);
         });
